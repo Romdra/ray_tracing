@@ -8,9 +8,15 @@ public class Vec3 {
         e[2] = e2;
     }
 
+    //COORDINATE
     public double x() {return e[0];}
     public double y() {return e[1];}
     public double z() {return e[2];}
+
+    //COLOR
+    public double r() {return e[0];}
+    public double g() {return e[1];}
+    public double b() {return e[2];}
 
     public Vec3 add(Vec3 v) {
         return new Vec3(e[0] + v.e[0], e[1] + v.e[1], e[2] + v.e[2]);

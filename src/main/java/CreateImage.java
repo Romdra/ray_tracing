@@ -21,23 +21,10 @@ public class CreateImage {
                 StandardOpenOption.CREATE,
                 StandardOpenOption.APPEND);
 
-        for(int j = imageHeight-1; j >= 0; --j) {
+        for (int k = imageHeight - 1; k >= 0; --k) {
             for (int i = 0; i < imageWidth; ++i) {
-                var r = (double)i / (imageWidth - 1);
-                var g = (double)j / (imageHeight - 1);
-                var b = 0.25;
-
-                int rImg = (int)Math.floor(255.999 * r);
-                int gImg = (int)Math.floor(255.999 * g);
-                int bImg = (int)Math.floor(255.999 * b);
-
-                String data = (rImg + " " + gImg + " " + bImg + "\n");
-                List<String> lines = Arrays.asList(data);
-                Files.write(Paths.get("/home/roman/Documents/Projects/Image.ppm"),
-                        lines,
-                        StandardCharsets.UTF_8,
-                        StandardOpenOption.CREATE,
-                        StandardOpenOption.APPEND);
+                Color pixelColor = new Color((double)i / (imageWidth - 1), (double)k / (imageHeight - 1), 0.25);
+                pixelColor.writeColor(pixelColor);
             }
         }
     }
