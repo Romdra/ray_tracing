@@ -3,6 +3,7 @@ import java.io.*;
 public class Color extends Vec3{
 
     public Color (double r, double g, double b) {
+
         super(r, g, b);
     }
 
