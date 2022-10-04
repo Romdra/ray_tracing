@@ -5,8 +5,7 @@ public class ImageRecording {
 
     public static void myRecord(String string) {
         try(FileWriter writer = new FileWriter("Image.ppm", true)) {
-            String create = string;
-            writer.write(create);
+            writer.write(string);
             writer.flush();
         } catch(IOException ex) {
             System.out.println(ex.getMessage());
