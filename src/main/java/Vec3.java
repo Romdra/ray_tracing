@@ -68,7 +68,8 @@ public class Vec3 {
                         u.e[0] * v.e[1] - u.e[1] * v.e[0]);
     }
 
-    public Vec3 unit_vector(Vec3 v) {
+    public Vec3 unitVector(Vec3 v) {
         return v.div(v.length());
     }
+
 }
