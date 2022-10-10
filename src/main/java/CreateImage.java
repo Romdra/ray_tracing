@@ -1,7 +1,13 @@
 public class CreateImage {
+    public static Color rayColor(Ray r) {
+        Vec3 unitDirection = Vec3.unitVector(r.direction());
+        double t = 0.5 * (unitDirection.y() + 1.0);
+        Vec3 rc = new Vec3(1.0, 1.0, 1.0).mul(1.0 - t)
+                .add(new Vec3(0.5, 0.7, 1.0).mul(t));
+        return Color.fromVec3(rc);
+    }
 
     public static void main(String[] args) {
-
         // Image
         final double aspectRatio = 16.0 / 9.0;
         final int imageWidth = 400;
@@ -16,8 +22,8 @@ public class CreateImage {
         Vec3 horizontal = new Vec3(viewportWidth, 0, 0);
         Vec3 vertical = new Vec3(0, viewportHeight, 0);
         Vec3 lowerLeftCorner = origin.sub(horizontal.div(2.0))
-                                .sub(vertical.div(2.0))
-                                .sub(new Vec3(0, 0, focalLength));
+                .sub(vertical.div(2.0))
+                .sub(new Vec3(0, 0, focalLength));
 
         // Render
         ImageRecording.myRecord("P3\n" + imageWidth + " " + imageHeight + "\n255\n");
@@ -27,12 +33,10 @@ public class CreateImage {
                 double u = (double) i / (imageWidth - 1);
                 double v = (double) j / (imageHeight - 1);
 
-                Vec3 direction = lowerLeftCorner.add(horizontal.mul(u)).add(vertical.mul(v)).div(origin);
+                Vec3 direction = lowerLeftCorner.add(horizontal.mul(u))
+                        .add(vertical.mul(v)).sub(origin);
                 Ray r = new Ray(origin, direction);
-
-                //TODO хз если честно.
-                Color pixelColor = Color.rayColor(r);
-
+                Color pixelColor = rayColor(r);
                 ImageRecording.myRecord(pixelColor.toString(pixelColor));
             }
         }

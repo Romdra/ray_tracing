@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Vec3 {
 
     double[] e = new double[3];
@@ -12,11 +14,6 @@ public class Vec3 {
     public double x() {return e[0];}
     public double y() {return e[1];}
     public double z() {return e[2];}
-
-    //COLOR
-    public double r() {return e[0];}
-    public double g() {return e[1];}
-    public double b() {return e[2];}
 
     public Vec3 add(Vec3 v) {
         return new Vec3(e[0] + v.e[0], e[1] + v.e[1], e[2] + v.e[2]);
@@ -56,20 +53,32 @@ public class Vec3 {
         return new Vec3(e[0] / v.e[0], e[1] / v.e[1], e[2] / v.e[2]);
     }
 
-    public double dot(Vec3 u, Vec3 v) {
-        return u.e[0] * v.e[0]
-             + u.e[1] * v.e[1]
-             + u.e[2] * v.e[2];
+    public double dot( Vec3 v) {
+        return e[0] * v.e[0]
+             + e[1] * v.e[1]
+             + e[2] * v.e[2];
     }
 
-    public Vec3 cross(Vec3 u, Vec3 v) {
-        return new Vec3(u.e[1] * v.e[2] - u.e[2] * v.e[1],
-                        u.e[2] * v.e[0] - u.e[0] * v.e[2],
-                        u.e[0] * v.e[1] - u.e[1] * v.e[0]);
+    public Vec3 cross(Vec3 v) {
+        return new Vec3(e[1] * v.e[2] - e[2] * v.e[1],
+                        e[2] * v.e[0] - e[0] * v.e[2],
+                        e[0] * v.e[1] - e[1] * v.e[0]);
     }
 
-    public Vec3 unitVector(Vec3 v) {
+    public static Vec3 unitVector(Vec3 v) {
         return v.div(v.length());
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vec3 vec3 = (Vec3) o;
+        return Arrays.equals(e, vec3.e);
+    }
+
+    @Override
+    public int hashCode() {
+        return Arrays.hashCode(e);
+    }
 }

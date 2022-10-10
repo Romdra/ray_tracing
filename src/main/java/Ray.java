@@ -1,9 +1,9 @@
-public class Ray extends Vec3{
+public class Ray {
 
     Vec3 dir;
     Vec3 orig;
 
-    public Ray() {};
+    public Ray() {}
     public Ray(Vec3 origin, Vec3 direction) {
         this.orig = origin;
         this.dir = direction;
