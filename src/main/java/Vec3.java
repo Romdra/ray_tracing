@@ -53,7 +53,7 @@ public class Vec3 {
         return new Vec3(e[0] / v.e[0], e[1] / v.e[1], e[2] / v.e[2]);
     }
 
-    public double dot( Vec3 v) {
+    public double dot(Vec3 v) {
         return e[0] * v.e[0]
              + e[1] * v.e[1]
              + e[2] * v.e[2];

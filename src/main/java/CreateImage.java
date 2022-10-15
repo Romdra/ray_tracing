@@ -1,5 +1,15 @@
 public class CreateImage {
+    public static boolean hitSphere(Vec3 center, double radius, Ray r) {
+        Vec3 oc = r.origin().sub(center);
+        double a = r.direction().dot(r.direction());
+        double b = 2.0 * oc.dot(r.direction());
+        double c = oc.dot(oc) - radius * radius;
+        double discriminant = b * b - 4 * a * c;
+        return (discriminant > 0);
+    }
     public static Color rayColor(Ray r) {
+        if (hitSphere(new Vec3(0,0,-1), 0.5, r))
+            return new Color(1, 0, 0);
         Vec3 unitDirection = Vec3.unitVector(r.direction());
         double t = 0.5 * (unitDirection.y() + 1.0);
         Vec3 rc = new Vec3(1.0, 1.0, 1.0).mul(1.0 - t)
