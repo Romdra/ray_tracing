@@ -1,9 +1,8 @@
 public class Ray {
 
-    Vec3 dir;
-    Vec3 orig;
+    private Vec3 dir;
+    private Vec3 orig;
 
-    public Ray() {}
     public Ray(Vec3 origin, Vec3 direction) {
         this.orig = origin;
         this.dir = direction;
@@ -13,6 +12,6 @@ public class Ray {
 
     public Vec3 linePosition(double t) {
 
-        return dir.add(orig.mul(t));
+        return orig.add(dir.mul(t));
     }
 }
