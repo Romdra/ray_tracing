@@ -10,15 +10,24 @@ public class Color {
     public double g() {return e[1];}
     public double b() {return e[2];}
 
-    public static Color fromVec3(Vec3 v) {
+        public static Color fromVec3(Vec3 v) {
 
         return new Color(v.x(), v.y(), v.z());
     }
 
-    public String toString(Color pixelColor) {
-        return ((int)Math.floor(255.999 * pixelColor.r()) + " "
-                + (int)Math.floor(255.999 * pixelColor.g()) + " "
-                + (int)Math.floor(255.999 * pixelColor.b()) + "\n");
+    public String toString(int samplesPerPixel) {
+        double scale = 1.0 / samplesPerPixel;
+
+        double r = (int)Math.floor(256 * clamp(r() * scale, 0.0, 0.999));
+        double g = (int)Math.floor(256 * clamp(g() * scale, 0.0, 0.999));
+        double b = (int)Math.floor(256 * clamp(b() * scale, 0.0, 0.999));
+        return (r + " " + g + " " + b + "\n");
+    }
+
+    public double clamp(double x, double min, double max) {
+        if (x < min) return min;
+        if (x > max) return max;
+        return x;
     }
 }
 
