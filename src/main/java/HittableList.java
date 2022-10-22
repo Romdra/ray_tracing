@@ -1,21 +1,24 @@
-import java.awt.*;
-
 public class HittableList extends Hittable {
 
-    public HittableList() {
+    int size;
+    Hittable[] objects;
 
+    public HittableList() {}
+    public HittableList(Hittable[] objects, int size) {
+        this.objects = objects;
+        this.size = size;
     }
-    
+
     public boolean hit (Ray r, double t_min, double t_max, HitRecord rec) {
-        HitRecord tempRec;
+        HitRecord tempRec = new HitRecord();
         boolean hitAnything = false;
         double closetSoFar = t_max;
 
-        for () {
-            if(hit(r, t_min, closetSoFar, tempRec)) {
+        for (int i = 0; i < size; i++) {
+            if(objects[i].hit(r, t_min, closetSoFar, tempRec)) {
                 hitAnything = true;
                 closetSoFar = tempRec.t;
-                rec = tempRec;
+                rec.set(tempRec);
             }
         }
 

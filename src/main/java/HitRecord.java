@@ -8,4 +8,10 @@ public class HitRecord {
         frontFace = r.direction().dot(outwardNormal) < 0;
         normal = frontFace ? outwardNormal : outwardNormal.mul(-1);
     }
+
+    public void set(HitRecord hr) {
+        t = hr.t;
+        p = hr.p;
+        normal = hr.normal;
+    }
 }

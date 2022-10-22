@@ -1,29 +1,20 @@
 public class CreateImage {
-    public static double hitSphere(Vec3 center, double radius, Ray r) {
-        Vec3 oc = r.origin().sub(center);
+    static final double INFINITY = Double.POSITIVE_INFINITY;
+    static final double PI = 3.1415926535897932385;
 
-        double a = r.direction().length_squared();
-        double half_b = oc.dot(r.direction());
-        double c = oc.length_squared() - Math.pow(radius, 2);
-        double discriminant = Math.pow(half_b, 2) - a * c;
-
-        if (discriminant < 0) {
-            return -1;
-        } else {
-            return (-half_b - Math.sqrt(discriminant)) / a;
-        }
+    public static double degrees_to_radians(double degrees) {
+        return degrees * PI / 180.0;
     }
-    public static Color rayColor(Ray r) {
-        double t = hitSphere(new Vec3(0,0,-1), 0.5, r);
 
-        if (t > 0.0) {
-            Vec3 n = Vec3.unitVector(r.linePosition(t).sub(new Vec3(0,0,-1)));
-            Vec3 res = new Vec3(n.x() + 1, n.y() + 1, n.z() + 1).mul(0.5);
-            return Color.fromVec3(res);
+    public static Color rayColor(Ray r, Hittable world) {
+        HitRecord rec = new HitRecord();
+        if(world.hit(r, 0, INFINITY, rec)) {
+            Vec3 color = new Vec3(1,1,1).add(rec.normal).mul(0.5);
+            return Color.fromVec3(color);
         }
 
         Vec3 unitDirection = Vec3.unitVector(r.direction());
-        t = 0.5 * (unitDirection.y() + 1.0);
+        double t = 0.5 * (unitDirection.y() + 1.0);
         Vec3 rc = new Vec3(1.0, 1.0, 1.0).mul(1.0 - t)
                 .add(new Vec3(0.5, 0.7, 1.0).mul(t));
 
@@ -35,6 +26,11 @@ public class CreateImage {
         final double aspectRatio = 16.0 / 9.0;
         final int imageWidth = 400;
         final int imageHeight = (int)(imageWidth / aspectRatio);
+
+        // World
+        HittableList world = new HittableList(new Hittable[2],2);
+        world.objects[0] = new Sphere(new Vec3(0,0,-1), 0.5);
+        world.objects[1] = new Sphere(new Vec3(0,-100.5,-1), 100);
 
         // Camera
         double viewportHeight = 2.0;
@@ -59,7 +55,7 @@ public class CreateImage {
                 Vec3 direction = lowerLeftCorner.add(horizontal.mul(u))
                         .add(vertical.mul(v)).sub(origin);
                 Ray r = new Ray(origin, direction);
-                Color pixelColor = rayColor(r);
+                Color pixelColor = rayColor(r, world);
                 ImageRecording.myRecord(pixelColor.toString(pixelColor));
             }
         }
