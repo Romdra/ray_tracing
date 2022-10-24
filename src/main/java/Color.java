@@ -18,13 +18,13 @@ public class Color {
     public String toString(int samplesPerPixel) {
         double scale = 1.0 / samplesPerPixel;
 
-        double r = (int)Math.floor(256 * clamp(r() * scale, 0.0, 0.999));
-        double g = (int)Math.floor(256 * clamp(g() * scale, 0.0, 0.999));
-        double b = (int)Math.floor(256 * clamp(b() * scale, 0.0, 0.999));
+        int r = (int)Math.floor(256 * clamp(r() * scale, 0.0, 0.999));
+        int g = (int)Math.floor(256 * clamp(g() * scale, 0.0, 0.999));
+        int b = (int)Math.floor(256 * clamp(b() * scale, 0.0, 0.999));
         return (r + " " + g + " " + b + "\n");
     }
 
-    public double clamp(double x, double min, double max) {
+    public static double clamp(double x, double min, double max) {
         if (x < min) return min;
         if (x > max) return max;
         return x;

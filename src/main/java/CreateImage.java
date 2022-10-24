@@ -9,7 +9,8 @@ public class CreateImage {
         final int samplesPerPixel = 100;
 
         // World
-        HittableList world = new HittableList(new Hittable[2],2);
+        Hittable[] w = new Hittable[2];
+        HittableList world = new HittableList(w,w.length);
         world.objects[0] = new Sphere(new Vec3(0,0,-1), 0.5);
         world.objects[1] = new Sphere(new Vec3(0,-100.5,-1), 100);
 
