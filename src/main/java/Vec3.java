@@ -66,7 +66,32 @@ public class Vec3 {
     }
 
     public static Vec3 unitVector(Vec3 v) {
+
         return v.div(v.length());
+    }
+
+    public static Vec3 random() {
+        return new Vec3((Math.random()*2 - 1), (Math.random()*2 - 1),
+                (Math.random()*2 - 1));
+    }
+
+    public static Vec3 random_in_unit_sphere() {
+        while (true) {
+            Vec3 p = random();
+            if (p.length_squared() >= 1) continue;
+            return p;
+        }
+    }
+
+    public static Vec3 random_unit_vector() {
+        return unitVector(random_in_unit_sphere());
+    }
+    public static Vec3 random_in_hemisphere(Vec3 normal) {
+        Vec3 in_unit_sphere = random_in_unit_sphere();
+        if (in_unit_sphere.dot(normal) > 0.0)
+            return in_unit_sphere;
+        else
+            return in_unit_sphere.mul(-1);
     }
 
     @Override
