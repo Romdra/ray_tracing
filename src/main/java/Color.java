@@ -1,5 +1,7 @@
 public class Color {
     double[] e = new double[3];
+
+    public Color() {}
     public Color (double r, double g, double b) {
         e[0] = r;
         e[1] = g;

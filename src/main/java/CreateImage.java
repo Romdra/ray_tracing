@@ -9,10 +9,18 @@ public class CreateImage {
         final int max_depth = 50;
 
         // World
-        Hittable[] w = new Hittable[2];
+        Hittable[] w = new Hittable[4];
         HittableList world = new HittableList(w,w.length);
-        world.objects[0] = new Sphere(new Vec3(0,0,-1), 0.5);
-        world.objects[1] = new Sphere(new Vec3(0,-100.5,-1), 100);
+
+        Material ground = new Lambertian(new Vec3(0.8, 0.8, 0.0));
+        Material center = new Lambertian(new Vec3(0.7, 0.3, 0.3));
+        Material left = new Metal(new Vec3(0.8, 0.8, 0.8));
+        Material right = new Metal(new Vec3(0.8, 0.6, 0.2));
+
+        world.objects[0] = new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, ground);
+        world.objects[1] = new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, center);
+        world.objects[2] = new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, left);
+        world.objects[3] = new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, right);
 
         // Camera
         Camera cam = new Camera();
@@ -40,9 +48,15 @@ public class CreateImage {
         if(depth <= 0) {
             return new Vec3(0,0,0);
         }
+
         if(world.hit(r, 0.001, INFINITY, rec)) {
-            Vec3 target = rec.p.add(Vec3.random_in_hemisphere(rec.normal));
-            return rayColor(new Ray(rec.p, target.sub(rec.p)), world, depth - 1).mul(0.5);
+            Ray scattered = new Ray();
+            Vec3 attenuation = new Vec3();
+            // TODO: It`s problem!!!
+            if (rec.matPtr.scatter(r, rec, attenuation, scattered)) {
+                return attenuation.mul(rayColor(scattered, world, depth));
+            }
+            return new Vec3(0, 0, 0);
         }
 
         Vec3 unitDirection = Vec3.unitVector(r.direction());
@@ -51,7 +65,7 @@ public class CreateImage {
                 .add(new Vec3(0.5, 0.7, 1.0).mul(t));
     }
 
-    public static double degrees_to_radians(double degrees) {
+    public static double degreesToRadians(double degrees) {
         return degrees * Math.PI / 180.0;
     }
 }
