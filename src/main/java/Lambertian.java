@@ -13,8 +13,8 @@ public class Lambertian extends Material {
             scatterDirection = rec.normal;
         }
 
-        scattered = new Ray(rec.p, scatterDirection);
-        attenuation = albedo;
+        scattered.set(new Ray(rec.p, scatterDirection));
+        attenuation.set(albedo);
         return true;
     }
 }

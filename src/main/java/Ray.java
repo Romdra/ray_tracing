@@ -18,4 +18,8 @@ public class Ray {
 
         return orig.add(dir.mul(t));
     }
+    public void set(Ray r) {
+        orig = r.orig;
+        dir = r.dir;
+    }
 }

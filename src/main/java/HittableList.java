@@ -4,18 +4,18 @@ public class HittableList extends Hittable {
     Hittable[] objects;
 
     public HittableList() {}
-    public HittableList(Hittable[] objects, int size) {
+    public HittableList(Hittable[] objects) {
         this.objects = objects;
-        this.size = size;
+        size = objects.length;
     }
 
-    public boolean hit (Ray r, double t_min, double t_max, HitRecord rec) {
+    public boolean hit (Ray r, double tMin, double tMax, HitRecord rec) {
         HitRecord tempRec = new HitRecord();
         boolean hitAnything = false;
-        double closetSoFar = t_max;
+        double closetSoFar = tMax;
 
         for (int i = 0; i < size; i++) {
-            if(objects[i].hit(r, t_min, closetSoFar, tempRec)) {
+            if(objects[i].hit(r, tMin, closetSoFar, tempRec)) {
                 hitAnything = true;
                 closetSoFar = tempRec.t;
                 rec.set(tempRec);

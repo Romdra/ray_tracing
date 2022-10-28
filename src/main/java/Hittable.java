@@ -1,5 +1,5 @@
 public abstract class Hittable {
-    public boolean hit(Ray r, double t_min, double t_max, HitRecord rec) {
+    public boolean hit(Ray r, double tMin, double tMax, HitRecord rec) {
         return false;
     }
 }

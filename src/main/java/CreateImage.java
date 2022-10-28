@@ -9,13 +9,12 @@ public class CreateImage {
         final int max_depth = 50;
 
         // World
-        Hittable[] w = new Hittable[4];
-        HittableList world = new HittableList(w,w.length);
+        HittableList world = new HittableList(new Hittable[4]);
 
         Material ground = new Lambertian(new Vec3(0.8, 0.8, 0.0));
         Material center = new Lambertian(new Vec3(0.7, 0.3, 0.3));
-        Material left = new Metal(new Vec3(0.8, 0.8, 0.8));
-        Material right = new Metal(new Vec3(0.8, 0.6, 0.2));
+        Material left = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
+        Material right = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
 
         world.objects[0] = new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, ground);
         world.objects[1] = new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, center);
@@ -52,9 +51,9 @@ public class CreateImage {
         if(world.hit(r, 0.001, INFINITY, rec)) {
             Ray scattered = new Ray();
             Vec3 attenuation = new Vec3();
-            // TODO: It`s problem!!!
-            if (rec.matPtr.scatter(r, rec, attenuation, scattered)) {
-                return attenuation.mul(rayColor(scattered, world, depth));
+
+            if (rec.mat.scatter(r, rec, attenuation, scattered)) {
+                return attenuation.mul(rayColor(scattered, world, depth-1));
             }
             return new Vec3(0, 0, 0);
         }

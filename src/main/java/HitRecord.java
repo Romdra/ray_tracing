@@ -1,7 +1,7 @@
 public class HitRecord {
     Vec3 p;
     Vec3 normal;
-    Material matPtr;
+    Material mat;
     double t;
     boolean frontFace;
 
@@ -14,5 +14,6 @@ public class HitRecord {
         t = hr.t;
         p = hr.p;
         normal = hr.normal;
+        mat = hr.mat;
     }
 }

@@ -1,13 +1,13 @@
 public class Sphere extends Hittable {
 
-    private Vec3 center;
-    private Material matPtr;
-    private double radius;
+    Vec3 center;
+    Material mat;
+    double radius;
 
     public Sphere(Vec3 cen, double r, Material m) {
         this.center = cen;
         this.radius = r;
-        this.matPtr = m;
+        this.mat = m;
     }
 
     public boolean hit(Ray r, double tMin, double tMax, HitRecord rec) {
@@ -31,7 +31,7 @@ public class Sphere extends Hittable {
         rec.p = r.linePosition(rec.t);
         Vec3 outwardNormal = (rec.p.sub(center)).div(radius);
         rec.setFaceNormal(r, outwardNormal);
-        rec.matPtr = matPtr;
+        rec.mat = mat;
 
         return true;
     }
