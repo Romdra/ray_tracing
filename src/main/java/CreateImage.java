@@ -9,17 +9,18 @@ public class CreateImage {
         final int max_depth = 50;
 
         // World
-        HittableList world = new HittableList(new Hittable[4]);
+        HittableList world = new HittableList(new Hittable[5]);
 
         Material ground = new Lambertian(new Vec3(0.8, 0.8, 0.0));
-        Material center = new Lambertian(new Vec3(0.7, 0.3, 0.3));
-        Material left = new Metal(new Vec3(0.8, 0.8, 0.8), 0.3);
-        Material right = new Metal(new Vec3(0.8, 0.6, 0.2), 1.0);
+        Material center = new Lambertian(new Vec3(0.1, 0.2, 0.5));
+        Material left = new Dielectric(1);
+        Material right = new Metal(new Vec3(0.8, 0.6, 0.2), 0.0);
 
         world.objects[0] = new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, ground);
         world.objects[1] = new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, center);
         world.objects[2] = new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, left);
-        world.objects[3] = new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, right);
+        world.objects[3] = new Sphere(new Vec3(-1.0, 0.0, -1.0), -0.4, left);
+        world.objects[4] = new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, right);
 
         // Camera
         Camera cam = new Camera();

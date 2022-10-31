@@ -103,6 +103,13 @@ public class Vec3 {
         return v.sub(n.mul(v.dot(n)).mul(2));
     }
 
+    public static Vec3 refract(Vec3 uv, Vec3 n, double etaiOverEtat) {
+        double cosTheta = Math.min(n.dot(uv.mul(-1.0)), 1.0);
+        Vec3 rOutPerp = uv.add(n.mul(cosTheta)).mul(etaiOverEtat);
+        Vec3 rOutParallel = n.mul(-Math.sqrt(Math.abs(1.0 - rOutPerp.lengthSquared())));
+        return rOutPerp.add(rOutParallel);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
