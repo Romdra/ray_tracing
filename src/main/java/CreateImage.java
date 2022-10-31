@@ -13,17 +13,17 @@ public class CreateImage {
 
         Material ground = new Lambertian(new Vec3(0.8, 0.8, 0.0));
         Material center = new Lambertian(new Vec3(0.1, 0.2, 0.5));
-        Material left = new Dielectric(1);
+        Material left = new Dielectric(1.5);
         Material right = new Metal(new Vec3(0.8, 0.6, 0.2), 0.0);
 
         world.objects[0] = new Sphere(new Vec3(0.0, -100.5, -1.0), 100.0, ground);
         world.objects[1] = new Sphere(new Vec3(0.0, 0.0, -1.0), 0.5, center);
         world.objects[2] = new Sphere(new Vec3(-1.0, 0.0, -1.0), 0.5, left);
-        world.objects[3] = new Sphere(new Vec3(-1.0, 0.0, -1.0), -0.4, left);
+        world.objects[3] = new Sphere(new Vec3(-1.0, 0.0, -1.0), -0.45, left);
         world.objects[4] = new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, right);
 
         // Camera
-        Camera cam = new Camera();
+        Camera cam = new Camera(new Vec3(-2, 2, 1), new Vec3(0,0,-1), new Vec3(0,1,0), 20.0, aspectRatio);
 
         // Render
         ImageRecording.myRecord("P3\n" + imageWidth + " " + imageHeight + "\n255\n");

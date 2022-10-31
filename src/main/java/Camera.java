@@ -5,23 +5,28 @@ public class Camera {
     Vec3 horizontal;
     Vec3 vertical;
 
-    public Camera() {
-        final double aspectRatio = 16.0 / 9.0;
-        double viewportHeight = 2.0;
+    public Camera(Vec3 lookFrom, Vec3 lookAt, Vec3 vup,
+                  double vfov, double aspectRatio) {
+        double theta = CreateImage.degreesToRadians(vfov);
+        double h = Math.tan(theta/2);
+        double viewportHeight = 2.0 * h;
         double viewportWidth = aspectRatio * viewportHeight;
-        double focalLength = 1.0;
 
-        origin = new Vec3(0, 0, 0);
-        horizontal = new Vec3(viewportWidth, 0, 0);
-        vertical = new Vec3(0, viewportHeight, 0);
+        Vec3 w = Vec3.unitVector(lookFrom.sub(lookAt));
+        Vec3 u = Vec3.unitVector(vup.cross(w));
+        Vec3 v = w.cross(u);
+
+        origin = lookFrom;
+        horizontal = u.mul(viewportWidth);
+        vertical = v.mul(viewportHeight);
         lowerLeftCorner = origin.sub(horizontal.div(2.0))
                 .sub(vertical.div(2.0))
-                .sub(new Vec3(0, 0, focalLength));
+                .sub(w);
     }
 
-    public Ray getRay(double u, double v) {
-        Vec3 direction = lowerLeftCorner.add(horizontal.mul(u))
-                .add(vertical.mul(v)).sub(origin);
+    public Ray getRay(double s, double t) {
+        Vec3 direction = lowerLeftCorner.add(horizontal.mul(s))
+                .add(vertical.mul(t)).sub(origin);
        return new Ray(origin, direction);
     }
 }
