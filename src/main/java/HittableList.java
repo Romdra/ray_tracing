@@ -3,10 +3,9 @@ public class HittableList extends Hittable {
     int size;
     Hittable[] objects;
 
-    public HittableList() {}
-    public HittableList(Hittable[] objects) {
+    public HittableList(Hittable[] objects, int s) {
         this.objects = objects;
-        size = objects.length;
+        this.size = s;
     }
 
     public boolean hit (Ray r, double tMin, double tMax, HitRecord rec) {

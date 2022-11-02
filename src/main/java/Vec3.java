@@ -71,8 +71,13 @@ public class Vec3 {
     }
 
     public static Vec3 random() {
-        return new Vec3((Math.random()*2 - 1), (Math.random()*2 - 1),
-                (Math.random()*2 - 1));
+        return new Vec3(Math.random()*2-1, Math.random()*2-1,
+                Math.random()*2-1);
+    }
+
+    public static Vec3 random(double min, double max) {
+        return new Vec3(min+Math.random()*max, min+Math.random()*max,
+                min+Math.random()*max);
     }
 
     public static Vec3 randomInUnitSphere() {
