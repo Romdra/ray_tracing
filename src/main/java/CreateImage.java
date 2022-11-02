@@ -23,7 +23,13 @@ public class CreateImage {
         world.objects[4] = new Sphere(new Vec3(1.0, 0.0, -1.0), 0.5, right);
 
         // Camera
-        Camera cam = new Camera(new Vec3(-2, 2, 1), new Vec3(0,0,-1), new Vec3(0,1,0), 20.0, aspectRatio);
+        Vec3 lookFrom = new Vec3(3, 3, 2);
+        Vec3 lookAt = new Vec3(0, 0, -1);
+        Vec3 vup = new Vec3(0, 1, 0);
+        double distToFocus = (lookFrom.minus(lookAt)).length();
+        double aperture = 2.0;
+        Camera cam = new Camera(lookFrom, lookAt, vup,
+                20.0, aspectRatio, aperture, distToFocus);
 
         // Render
         ImageRecording.myRecord("P3\n" + imageWidth + " " + imageHeight + "\n255\n");

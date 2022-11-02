@@ -111,6 +111,14 @@ public class Vec3 {
         return rOutPerp.plus(rOutParallel);
     }
 
+    public static Vec3 randomInUnitDisk() {
+        while(true) {
+            Vec3 p = new Vec3(Math.random() * 2 - 1, Math.random() * 2 - 1, 0);
+            if(p.lengthSquared() >= 1) continue;
+            return p;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
