@@ -100,6 +100,7 @@ public class Vec3 {
     }
 
     public static Vec3 reflect(Vec3 v, Vec3 n) {
+
         return v.minus(n.mul(v.dot(n)).mul(2));
     }
 

@@ -11,9 +11,10 @@ public class HitRecord {
     }
 
     public void set(HitRecord hr) {
-        t = hr.t;
-        p = hr.p;
-        normal = hr.normal;
-        mat = hr.mat;
+        this.t = hr.t;
+        this.p = hr.p;
+        this.normal = hr.normal;
+        this.mat = hr.mat;
+        this.frontFace = hr.frontFace;
     }
 }

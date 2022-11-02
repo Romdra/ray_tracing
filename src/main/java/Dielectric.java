@@ -12,7 +12,7 @@ public class Dielectric extends Material {
 
         Vec3 unitDirection = Vec3.unitVector(rIn.direction());
         double cosTheta = Math.min(unitDirection.mul(-1.0).dot(rec.normal), 1.0);
-        double sinTheta = Math.sqrt(1.0 - Math.pow(cosTheta, 2));
+        double sinTheta = Math.sqrt(1.0 - cosTheta * cosTheta);
 
         boolean cannotRefract = refractionRatio * sinTheta > 1.0;
         Vec3 direction = new Vec3();
