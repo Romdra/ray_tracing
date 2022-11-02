@@ -15,7 +15,7 @@ public class Vec3 {
     public double y() {return e[1];}
     public double z() {return e[2];}
 
-    public Vec3 add(Vec3 v) {
+    public Vec3 plus(Vec3 v) {
         return new Vec3(e[0] + v.e[0], e[1] + v.e[1], e[2] + v.e[2]);
     }
 
@@ -41,7 +41,7 @@ public class Vec3 {
 
     // Vec3 Utility methods
 
-    public Vec3 sub(Vec3 v) {
+    public Vec3 minus(Vec3 v) {
         return new Vec3(e[0] - v.e[0], e[1] - v.e[1], e[2] - v.e[2]);
     }
 
@@ -100,14 +100,14 @@ public class Vec3 {
     }
 
     public static Vec3 reflect(Vec3 v, Vec3 n) {
-        return v.sub(n.mul(v.dot(n)).mul(2));
+        return v.minus(n.mul(v.dot(n)).mul(2));
     }
 
     public static Vec3 refract(Vec3 uv, Vec3 n, double etaiOverEtat) {
         double cosTheta = Math.min(n.dot(uv.mul(-1.0)), 1.0);
-        Vec3 rOutPerp = uv.add(n.mul(cosTheta)).mul(etaiOverEtat);
+        Vec3 rOutPerp = uv.plus(n.mul(cosTheta)).mul(etaiOverEtat);
         Vec3 rOutParallel = n.mul(-Math.sqrt(Math.abs(1.0 - rOutPerp.lengthSquared())));
-        return rOutPerp.add(rOutParallel);
+        return rOutPerp.plus(rOutParallel);
     }
 
     @Override

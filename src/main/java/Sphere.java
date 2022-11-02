@@ -11,7 +11,7 @@ public class Sphere extends Hittable {
     }
 
     public boolean hit(Ray r, double tMin, double tMax, HitRecord rec) {
-        Vec3 oc = r.origin().sub(center);
+        Vec3 oc = r.origin().minus(center);
 
         double a = r.direction().lengthSquared();
         double half_b = oc.dot(r.direction());
@@ -29,7 +29,7 @@ public class Sphere extends Hittable {
 
         rec.t = root;
         rec.p = r.linePosition(rec.t);
-        Vec3 outwardNormal = (rec.p.sub(center)).div(radius);
+        Vec3 outwardNormal = (rec.p.minus(center)).div(radius);
         rec.setFaceNormal(r, outwardNormal);
         rec.mat = mat;
 

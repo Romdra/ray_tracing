@@ -9,7 +9,7 @@ class Vec3Test {
         Vec3 one = new Vec3(1, 1, 1);
         Vec3 two = new Vec3(4, 5, 6);
         Vec3 expected = new Vec3(5, 6, 7);
-        Vec3 actual = one.add(two);
+        Vec3 actual = one.plus(two);
 
         assertTrue(expected.equals(actual));
     }
@@ -39,7 +39,7 @@ class Vec3Test {
         Vec3 one = new Vec3(1, 1, 1);
         Vec3 two = new Vec3(4, 5, 6);
         Vec3 expected = new Vec3(-3, -4, -5);
-        Vec3 actual = one.sub(two);
+        Vec3 actual = one.minus(two);
 
         assertTrue(expected.equals(actual));
     }

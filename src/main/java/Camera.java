@@ -12,21 +12,21 @@ public class Camera {
         double viewportHeight = 2.0 * h;
         double viewportWidth = aspectRatio * viewportHeight;
 
-        Vec3 w = Vec3.unitVector(lookFrom.sub(lookAt));
+        Vec3 w = Vec3.unitVector(lookFrom.minus(lookAt));
         Vec3 u = Vec3.unitVector(vup.cross(w));
         Vec3 v = w.cross(u);
 
         origin = lookFrom;
         horizontal = u.mul(viewportWidth);
         vertical = v.mul(viewportHeight);
-        lowerLeftCorner = origin.sub(horizontal.div(2.0))
-                .sub(vertical.div(2.0))
-                .sub(w);
+        lowerLeftCorner = origin.minus(horizontal.div(2.0))
+                .minus(vertical.div(2.0))
+                .minus(w);
     }
 
     public Ray getRay(double s, double t) {
-        Vec3 direction = lowerLeftCorner.add(horizontal.mul(s))
-                .add(vertical.mul(t)).sub(origin);
+        Vec3 direction = lowerLeftCorner.plus(horizontal.mul(s))
+                .plus(vertical.mul(t)).minus(origin);
        return new Ray(origin, direction);
     }
 }

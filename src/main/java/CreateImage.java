@@ -35,7 +35,7 @@ public class CreateImage {
                     double u = (i + Math.random()) / (imageWidth - 1);
                     double v = (j + Math.random()) / (imageHeight - 1);
                     Ray r = cam.getRay(u, v);
-                    pixelColor = pixelColor.add(rayColor(r, world, max_depth));
+                    pixelColor = pixelColor.plus(rayColor(r, world, max_depth));
                 }
                 ImageRecording.myRecord(Color.fromVec3(pixelColor).toString(samplesPerPixel));
             }
@@ -62,7 +62,7 @@ public class CreateImage {
         Vec3 unitDirection = Vec3.unitVector(r.direction());
         double t = 0.5 * (unitDirection.y() + 1.0);
         return new Vec3(1.0, 1.0, 1.0).mul(1.0 - t)
-                .add(new Vec3(0.5, 0.7, 1.0).mul(t));
+                .plus(new Vec3(0.5, 0.7, 1.0).mul(t));
     }
 
     public static double degreesToRadians(double degrees) {

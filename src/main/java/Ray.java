@@ -16,7 +16,7 @@ public class Ray {
 
     public Vec3 linePosition(double t) {
 
-        return orig.add(dir.mul(t));
+        return orig.plus(dir.mul(t));
     }
     public void set(Ray r) {
         orig = r.orig;

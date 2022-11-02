@@ -10,7 +10,7 @@ public class Metal extends Material {
 
     public boolean scatter(Ray rIn, HitRecord rec, Vec3 attenuation, Ray scattered) {
         Vec3 reflected = Vec3.reflect(Vec3.unitVector(rIn.direction()), rec.normal);
-        scattered.set(new Ray(rec.p, reflected.add(Vec3.randomInUnitSphere().mul(fuzz))));
+        scattered.set(new Ray(rec.p, reflected.plus(Vec3.randomInUnitSphere().mul(fuzz))));
         attenuation.set(albedo);
         return (scattered.direction().dot(rec.normal) > 0);
     }
