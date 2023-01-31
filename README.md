@@ -1,3 +1,3 @@
-# ray_tracing
+# Ray tracing
 
-Project from https://raytracing.github.io/books/RayTracingInOneWeekend.html
+Remake C++ project into Java 
